@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">WeatherApp</string>
+    <string name="city_name_hint">Podaj nazwę miejscowości</string>
+    <string name="save_city">Zapamiętaj miejscowość</string>
+    <string name="next_text">Dalej</string>
 </resources>
