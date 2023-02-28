@@ -11,12 +11,14 @@ class WeatherApiRepositoryImpl(
     override suspend fun getSearchResult(query: String): Result<List<SearchEntity>> {
         val searchResult = runCatching {
             api.getSearchPropositions(query)
+        }.onFailure {
+            Timber.e(it)
         }
 
         return searchResult.mapCatching {
             it.map { response ->
                 with(response) {
-                    SearchEntity(id, name, region, country)
+                    SearchEntity("$lat,$lon", name, region, country)
                 }
             }
         }.onFailure { Timber.e(it) }

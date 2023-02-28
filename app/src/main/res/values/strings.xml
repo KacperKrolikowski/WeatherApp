@@ -3,4 +3,5 @@
     <string name="city_name_hint">Podaj nazwę miejscowości</string>
     <string name="save_city">Zapamiętaj miejscowość</string>
     <string name="next_text">Dalej</string>
+    <string name="something_went_wrong_info">Coś poszło nie tak, spróbuj ponownie później</string>
 </resources>
