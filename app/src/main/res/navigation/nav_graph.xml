@@ -7,5 +7,17 @@
     <fragment
         android:id="@+id/selectorFragment"
         android:name="com.example.weatherapp.ui.selector.SelectorFragment"
-        android:label="SelectorFragment" />
+        android:label="SelectorFragment" >
+        <action
+            android:id="@+id/action_selectorFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.example.weatherapp.ui.home.HomeFragment"
+        android:label="HomeFragment" >
+        <argument
+            android:name="LocationId"
+            app:argType="string" />
+    </fragment>
 </navigation>

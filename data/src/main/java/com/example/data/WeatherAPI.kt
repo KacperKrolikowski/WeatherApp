@@ -6,7 +6,7 @@ import retrofit2.http.Query
 
 interface WeatherAPI {
 
-    @GET
+    @GET("v1/search.json")
     suspend fun getSearchPropositions(
         @Query(QUERY) query: String
     ): List<SearchItemResponse>
