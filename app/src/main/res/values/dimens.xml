@@ -4,4 +4,12 @@
     <dimen name="margin_m">4dp</dimen>
     <dimen name="margin_l">8dp</dimen>
     <dimen name="margin_xl">16dp</dimen>
+    <dimen name="margin_xxl">32dp</dimen>
+
+    <dimen name="location_text_size">12sp</dimen>
+    <dimen name="future_temperature_text_size">18sp</dimen>
+    <dimen name="additional_info_text_size">22sp</dimen>
+    <dimen name="temperature_text_size">32sp</dimen>
+    <dimen name="temperature_top_margin">48dp</dimen>
+    <dimen name="weather_icon_size">24dp</dimen>
 </resources>
