@@ -10,6 +10,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.weatherapp.R
 import com.example.weatherapp.base.BaseFragment
 import com.example.weatherapp.databinding.FragmentSelectorBinding
+import com.example.weatherapp.ui.selector.items.SearchItem
 import com.google.android.material.snackbar.Snackbar
 import com.xwray.groupie.GroupieAdapter
 import dagger.hilt.android.AndroidEntryPoint
@@ -52,6 +53,7 @@ class SelectorFragment :
 
     private fun setSearchResults(results: List<SearchItem>) {
         binding.progressIndicator.isVisible = false
+        binding.selectFromListText.isVisible = true
         contentAdapter.apply {
             update(results)
             setOnItemClickListener { item, _ ->
@@ -67,11 +69,15 @@ class SelectorFragment :
     }
 
     private fun setEmptyList() {
+        binding.selectFromListText.isVisible = false
         contentAdapter.update(listOf())
     }
 
     private fun setLoadingState() {
-        binding.progressIndicator.isVisible = true
+        binding.apply {
+            selectFromListText.isVisible = false
+            progressIndicator.isVisible = true
+        }
     }
 
     private fun setErrorState() {

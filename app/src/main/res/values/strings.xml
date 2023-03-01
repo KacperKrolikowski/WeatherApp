@@ -2,6 +2,12 @@
     <string name="app_name">WeatherApp</string>
     <string name="city_name_hint">Podaj nazwę miejscowości</string>
     <string name="save_city">Zapamiętaj miejscowość</string>
+    <string name="select_city">Wybierz z listy</string>
     <string name="next_text">Dalej</string>
     <string name="something_went_wrong_info">Coś poszło nie tak, spróbuj ponownie później</string>
+
+    <string name="temperature_name">Temperatura</string>
+    <string name="wind_name">Wiatr</string>
+    <string name="feels_like_name">Odczuwalna temperatura</string>
+    <string name="pressure_name">Ciśnienie</string>
 </resources>

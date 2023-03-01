@@ -1,6 +1,130 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <TextView
+        android:id="@+id/temperature_value_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/temperature_top_margin"
+        android:textSize="@dimen/temperature_text_size"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="23" />
+
+    <TextView
+        android:id="@+id/temperature_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_m"
+        android:text="@string/temperature_name"
+        app:layout_constraintEnd_toEndOf="@+id/temperature_value_text"
+        app:layout_constraintStart_toStartOf="@+id/temperature_value_text"
+        app:layout_constraintTop_toBottomOf="@+id/temperature_value_text"
+        tools:text="Temperature" />
+
+    <TextView
+        android:id="@+id/wind_value_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/additional_info_text_size"
+        app:layout_constraintBottom_toBottomOf="@+id/feels_like_value_text"
+        app:layout_constraintEnd_toEndOf="@+id/wind_text"
+        app:layout_constraintStart_toStartOf="@+id/wind_text"
+        tools:text="NE 6.1 kmh" />
+
+    <TextView
+        android:id="@+id/wind_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_m"
+        android:text="@string/wind_name"
+        app:layout_constraintEnd_toStartOf="@+id/feels_like_text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/wind_value_text"
+        tools:text="Wind" />
+
+    <TextView
+        android:id="@+id/feels_like_value_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/temperature_top_margin"
+        android:textSize="@dimen/additional_info_text_size"
+        app:layout_constraintEnd_toEndOf="@+id/feels_like_text"
+        app:layout_constraintStart_toStartOf="@+id/feels_like_text"
+        app:layout_constraintTop_toBottomOf="@+id/location_text"
+        tools:text="21" />
+
+    <TextView
+        android:id="@+id/feels_like_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_m"
+        android:text="@string/feels_like_name"
+        app:layout_constraintEnd_toEndOf="@+id/temperature_value_text"
+        app:layout_constraintStart_toStartOf="@+id/temperature_value_text"
+        app:layout_constraintTop_toBottomOf="@+id/feels_like_value_text"
+        tools:text="Feels like" />
+
+    <TextView
+        android:id="@+id/pressure_value_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/additional_info_text_size"
+        app:layout_constraintBottom_toBottomOf="@+id/feels_like_value_text"
+        app:layout_constraintEnd_toEndOf="@+id/pressure_text"
+        app:layout_constraintStart_toStartOf="@+id/pressure_text"
+        tools:text="1040 mb" />
+
+    <TextView
+        android:id="@+id/pressure_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_m"
+        android:text="@string/pressure_name"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/feels_like_text"
+        app:layout_constraintTop_toBottomOf="@+id/pressure_value_text"
+        tools:text="Pressure" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/margin_xl"
+        android:layout_marginTop="@dimen/margin_xxl"
+        android:orientation="horizontal"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/feels_like_text" />
+
+    <TextView
+        android:id="@+id/location_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_xl"
+        android:textSize="@dimen/location_text_size"
+        android:gravity="center"
+        app:drawableStartCompat="@drawable/ic_pin"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/temperature_text"
+        tools:text="Jawor" />
+
+    <com.google.android.material.progressindicator.CircularProgressIndicator
+        android:id="@+id/progress_indicator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:indeterminate="true"
+        android:visibility="gone"
+        app:indicatorColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
