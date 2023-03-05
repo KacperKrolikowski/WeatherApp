@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:paddingHorizontal="@dimen/margin_m"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/weather_icon"
+        android:layout_width="@dimen/weather_icon_size"
+        android:layout_height="@dimen/weather_icon_size"
+        android:layout_marginTop="@dimen/margin_m"
+        android:layout_marginEnd="@dimen/margin_m"
+        app:layout_constraintEnd_toStartOf="@id/avg_temperature_text"
+        app:layout_constraintStart_toStartOf="@+id/date_text"
+        app:layout_constraintTop_toBottomOf="@+id/date_text"
+        tools:ignore="ContentDescription" />
+
+    <TextView
+        android:id="@+id/avg_temperature_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="-0.8"
+        android:textSize="@dimen/future_temperature_text_size"
+        app:layout_constraintBottom_toBottomOf="@+id/weather_icon"
+        app:layout_constraintEnd_toEndOf="@+id/date_text"
+        app:layout_constraintStart_toEndOf="@+id/weather_icon"
+        app:layout_constraintTop_toTopOf="@+id/weather_icon" />
+
+    <TextView
+        android:id="@+id/min_temperature_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="-3.0"
+        android:layout_marginTop="@dimen/margin_m"
+        android:gravity="center"
+        app:layout_constraintEnd_toStartOf="@id/max_temperature_text"
+        app:layout_constraintStart_toStartOf="@+id/weather_icon"
+        app:layout_constraintTop_toBottomOf="@+id/weather_icon"
+        app:drawableStartCompat="@drawable/ic_min_temperature" />
+
+    <TextView
+        android:id="@+id/max_temperature_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        app:drawableStartCompat="@drawable/ic_max_temperature"
+        app:layout_constraintEnd_toEndOf="@+id/avg_temperature_text"
+        app:layout_constraintStart_toEndOf="@+id/min_temperature_text"
+        app:layout_constraintTop_toTopOf="@+id/min_temperature_text"
+        tools:text="1.5" />
+
+    <TextView
+        android:id="@+id/date_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="28.02"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

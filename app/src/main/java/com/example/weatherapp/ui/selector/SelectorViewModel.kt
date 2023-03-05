@@ -4,10 +4,12 @@ import androidx.lifecycle.viewModelScope
 import com.example.domain.usecases.SearchByQueryUseCase
 import com.example.weatherapp.base.BaseViewModel
 import com.example.weatherapp.ui.selector.SelectorFragment.Companion.MINIMAL_QUERY_LENGTH
+import com.example.weatherapp.ui.selector.items.SearchItem
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
@@ -53,6 +55,7 @@ class SelectorViewModel @Inject constructor(
                         })
                     )
                 }.onFailure {
+                    Timber.e(it)
                     postErrorState()
                 }
             }

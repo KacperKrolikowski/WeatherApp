@@ -1,4 +1,4 @@
-package com.example.weatherapp.ui.selector
+package com.example.weatherapp.ui.selector.items
 
 import android.view.View
 import com.example.domain.entities.SearchEntity
