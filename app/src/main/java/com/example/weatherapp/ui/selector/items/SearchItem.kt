@@ -7,7 +7,8 @@ import com.example.weatherapp.databinding.ItemSearchBinding
 import com.xwray.groupie.viewbinding.BindableItem
 
 class SearchItem(
-    val item: SearchEntity
+    val item: SearchEntity,
+    private val deleteFromHistory: (SearchEntity) -> Unit
 ) : BindableItem<ItemSearchBinding>() {
     override fun getLayout() = R.layout.item_search
 
@@ -15,7 +16,15 @@ class SearchItem(
 
     override fun bind(binding: ItemSearchBinding, position: Int) {
         with(binding) {
-            if (item.isFromHistory.not()) historyIcon.visibility = View.INVISIBLE
+            if (item.isFromHistory) {
+                historyIcon.visibility = View.VISIBLE
+                deleteIcon.apply {
+                    visibility = View.VISIBLE
+                    setOnClickListener {
+                        deleteFromHistory(item)
+                    }
+                }
+            }
             val textBuilder = item.name +
                     ", ${item.region}".takeIf { item.region.isNotEmpty() }.orEmpty() +
                     ", ${item.country}".takeIf { item.country.isNotEmpty() }.orEmpty()

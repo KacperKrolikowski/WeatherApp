@@ -58,6 +58,7 @@ class SelectorFragment :
             update(results)
             setOnItemClickListener { item, _ ->
                 if (item is SearchItem) {
+                    viewModel.onViewEvent(SelectorViewEvent.SavePlace(item.item))
                     findNavController().navigate(
                         SelectorFragmentDirections.actionSelectorFragmentToHomeFragment(
                             item.item.id
