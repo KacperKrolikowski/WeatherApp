@@ -6,5 +6,5 @@ import javax.inject.Inject
 class GetSavedPlacesUseCase @Inject constructor(
     private val weatherDatabaseRepository: WeatherDatabaseRepository
 ) {
-    suspend fun execute() = weatherDatabaseRepository.getSavedPlaces()
+    fun execute() = weatherDatabaseRepository.getSavedPlaces()
 }
