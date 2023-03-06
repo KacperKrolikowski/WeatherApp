@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.domain.entities.WeatherData
 import com.example.weatherapp.R
@@ -37,6 +38,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewState, HomeViewEv
         viewModel.onViewEvent(HomeViewEvent.GetWeatherData(args.locationId))
         with(binding) {
             recyclerView.adapter = futureWeatherAdapter
+            backButton.setOnClickListener {
+                findNavController().navigate(
+                    HomeFragmentDirections.actionHomeFragmentToSelectorFragment()
+                )
+            }
         }
     }
 

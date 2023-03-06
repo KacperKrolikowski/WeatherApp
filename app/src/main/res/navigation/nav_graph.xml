@@ -19,5 +19,10 @@
         <argument
             android:name="LocationId"
             app:argType="string" />
+        <action
+            android:id="@+id/action_homeFragment_to_selectorFragment"
+            app:destination="@id/selectorFragment"
+            app:popUpTo="@id/selectorFragment"
+            app:popUpToInclusive="true" />
     </fragment>
 </navigation>

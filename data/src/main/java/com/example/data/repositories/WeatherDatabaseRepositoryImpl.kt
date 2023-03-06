@@ -4,6 +4,8 @@ import com.example.data.database.SearchedPlacesDao
 import com.example.data.utils.toDatabaseEntity
 import com.example.domain.entities.SearchEntity
 import com.example.domain.repositories.WeatherDatabaseRepository
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 
 class WeatherDatabaseRepositoryImpl(
     private val searchedPlacesDao: SearchedPlacesDao
@@ -16,9 +18,7 @@ class WeatherDatabaseRepositoryImpl(
         searchedPlacesDao.deletePlace(searchEntity.toDatabaseEntity())
     }
 
-    override suspend fun getSavedPlaces(): List<SearchEntity> {
-        return searchedPlacesDao.getSaved().map {
-            it.toEntity()
-        }
+    override fun getSavedPlaces(): Flow<List<SearchEntity>> {
+        return searchedPlacesDao.getSaved().map { list -> list.map { it.toEntity() } }
     }
 }

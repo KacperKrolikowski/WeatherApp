@@ -1,6 +1,10 @@
 package com.example.weatherapp.ui.selector
 
 import androidx.lifecycle.viewModelScope
+import com.example.domain.entities.SearchEntity
+import com.example.domain.usecases.DeleteSavedPlaceUseCase
+import com.example.domain.usecases.GetSavedPlacesUseCase
+import com.example.domain.usecases.SavePlaceUseCase
 import com.example.domain.usecases.SearchByQueryUseCase
 import com.example.weatherapp.base.BaseViewModel
 import com.example.weatherapp.ui.selector.SelectorFragment.Companion.MINIMAL_QUERY_LENGTH
@@ -8,19 +12,24 @@ import com.example.weatherapp.ui.selector.items.SearchItem
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
 class SelectorViewModel @Inject constructor(
-    private val searchByQueryUseCase: SearchByQueryUseCase
+    private val searchByQueryUseCase: SearchByQueryUseCase,
+    private val getSavedPlacesUseCase: GetSavedPlacesUseCase,
+    private val savePlaceUseCase: SavePlaceUseCase,
+    private val deleteSavedPlaceUseCase: DeleteSavedPlaceUseCase
 ) : BaseViewModel<SelectorViewEvent, SelectorViewState>() {
 
     private var searchJob: Job? = null
     override fun onViewEvent(viewEvent: SelectorViewEvent) {
         when (viewEvent) {
             is SelectorViewEvent.SearchByQuery -> onSearchQueryChanged(viewEvent.query)
+            is SelectorViewEvent.SavePlace -> savePlace(viewEvent.searchEntity)
         }
     }
 
@@ -40,25 +49,50 @@ class SelectorViewModel @Inject constructor(
         searchJob = searchText.takeIf { it.isNotEmpty() }?.let { text ->
             viewModelScope.launch {
                 delay(DEBOUNCE_TIME)
-                searchByQuery(text)
+                searchForResults(text)
             }
         }
     }
 
-    private fun searchByQuery(query: String) {
+    private fun deleteFromHistory(searchEntity: SearchEntity) {
         viewModelScope.launch {
-            searchByQueryUseCase.execute(query).let { result ->
-                result.onSuccess {
-                    mutableViewState.postValue(
-                        SelectorViewState.Success(it.map { searchEntity ->
-                            SearchItem(searchEntity)
-                        })
-                    )
-                }.onFailure {
-                    Timber.e(it)
-                    postErrorState()
+            deleteSavedPlaceUseCase.execute(searchEntity)
+        }
+    }
+
+    private fun searchForResults(query: String) {
+        viewModelScope.launch {
+            getSavedPlacesUseCase.execute().collectLatest { list ->
+                val databaseResults =
+                    list.filter { it.name.contains(query) }.take(DEFAULT_SIZE).map {
+                        SearchItem(it, ::deleteFromHistory)
+                    }
+                searchByQueryUseCase.execute(query).let { result ->
+                    result.onSuccess { sourceItems ->
+                        val results = sourceItems.map { searchEntity ->
+                            SearchItem(
+                                searchEntity,
+                                ::deleteFromHistory
+                            )
+                        }
+
+                        mutableViewState.postValue(
+                            SelectorViewState.Success(
+                                databaseResults + results
+                            )
+                        )
+                    }.onFailure {
+                        Timber.e(it)
+                        postErrorState()
+                    }
                 }
             }
+        }
+    }
+
+    private fun savePlace(searchEntity: SearchEntity) {
+        viewModelScope.launch {
+            savePlaceUseCase.execute(searchEntity)
         }
     }
 
@@ -76,5 +110,7 @@ class SelectorViewModel @Inject constructor(
 
     companion object {
         private const val DEBOUNCE_TIME = 600L
+        private const val DEFAULT_SIZE = 3
+
     }
 }
