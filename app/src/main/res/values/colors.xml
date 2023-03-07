@@ -9,4 +9,7 @@
     <color name="white">#FFFFFFFF</color>
     <color name="light_blue">#C7F4FF</color>
     <color name="strong_blue">#2BB2FF</color>
+    <color name="temperature_text_low">#0061A3</color>
+    <color name="temperature_text_medium">#000000</color>
+    <color name="temperature_text_high">#D10000</color>
 </resources>
