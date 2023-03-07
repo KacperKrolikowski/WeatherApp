@@ -3,6 +3,7 @@ package com.example.weatherapp.ui.home
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
+import androidx.core.content.ContextCompat.getColor
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -39,6 +40,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewState, HomeViewEv
         with(binding) {
             recyclerView.adapter = futureWeatherAdapter
             backButton.setOnClickListener {
+                viewModel.onViewEvent(HomeViewEvent.ClearPreviouslyRemember)
                 findNavController().navigate(
                     HomeFragmentDirections.actionHomeFragmentToSelectorFragment()
                 )
@@ -48,7 +50,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewState, HomeViewEv
 
     override fun onDestroyView() {
         binding.recyclerView.adapter = null
-
         super.onDestroyView()
     }
 
@@ -56,7 +57,16 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewState, HomeViewEv
     private fun setSuccessState(weatherData: WeatherData) {
         with(binding) {
             with(weatherData.current) {
-                temperatureValueText.text = "$temperature \u2103"
+                temperatureValueText.apply {
+                    text = "$temperature \u2103"
+                    setTextColor(
+                        when {
+                            temperature < LOW_TEMPERATURE -> getColor(context, R.color.temperature_text_low)
+                            temperature < MEDIUM_TEMPERATURE -> getColor(context, R.color.temperature_text_medium)
+                            else -> getColor(context, R.color.temperature_text_high)
+                        }
+                    )
+                }
                 windValueText.text = "$windDirection $windSpeed km/h"
                 pressureValueText.text = "$pressure hPa"
                 feelsLikeValueText.text = "$feelsLikeTemperature \u2103"
@@ -78,5 +88,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewState, HomeViewEv
             getString(R.string.something_went_wrong_info),
             Snackbar.LENGTH_SHORT
         ).show()
+    }
+
+    companion object{
+        private const val LOW_TEMPERATURE = 10
+        private const val MEDIUM_TEMPERATURE = 20
     }
 }

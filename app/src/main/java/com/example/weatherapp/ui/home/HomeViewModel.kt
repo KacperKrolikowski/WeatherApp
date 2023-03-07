@@ -1,6 +1,7 @@
 package com.example.weatherapp.ui.home
 
 import androidx.lifecycle.viewModelScope
+import com.example.domain.usecases.ClearDefaultUseCase
 import com.example.domain.usecases.GetWeatherUseCase
 import com.example.weatherapp.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -10,11 +11,13 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    private val getWeatherUseCase: GetWeatherUseCase
+    private val getWeatherUseCase: GetWeatherUseCase,
+    private val clearDefaultUseCase: ClearDefaultUseCase
 ) : BaseViewModel<HomeViewEvent, HomeViewState>() {
     override fun onViewEvent(viewEvent: HomeViewEvent) {
         when(viewEvent){
             is HomeViewEvent.GetWeatherData -> getWeather(viewEvent.id)
+            HomeViewEvent.ClearPreviouslyRemember -> clearPreviouslyIfNeeded()
         }
     }
 
@@ -30,6 +33,10 @@ class HomeViewModel @Inject constructor(
                 postErrorState()
             }
         }
+    }
+
+    private fun clearPreviouslyIfNeeded(){
+        clearDefaultUseCase.execute()
     }
 
     private fun postLoadingState() {

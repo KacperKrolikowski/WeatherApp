@@ -4,6 +4,8 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
+import android.os.Bundle
+import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.weatherapp.R
@@ -24,6 +26,12 @@ class SplashScreenFragment :
         when (viewState) {
             is SplashScreenViewState.Success -> checkInternetConnection(viewState.id)
         }
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        viewModel.onViewEvent(SplashScreenViewEvent.GetData)
     }
 
     private fun checkInternetConnection(id: String) = when {
