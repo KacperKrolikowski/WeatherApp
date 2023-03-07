@@ -6,6 +6,7 @@ import com.example.domain.usecases.DeleteSavedPlaceUseCase
 import com.example.domain.usecases.GetSavedPlacesUseCase
 import com.example.domain.usecases.SavePlaceUseCase
 import com.example.domain.usecases.SearchByQueryUseCase
+import com.example.domain.usecases.SetAsDefaultUseCase
 import com.example.weatherapp.base.BaseViewModel
 import com.example.weatherapp.ui.selector.SelectorFragment.Companion.MINIMAL_QUERY_LENGTH
 import com.example.weatherapp.ui.selector.items.SearchItem
@@ -22,14 +23,18 @@ class SelectorViewModel @Inject constructor(
     private val searchByQueryUseCase: SearchByQueryUseCase,
     private val getSavedPlacesUseCase: GetSavedPlacesUseCase,
     private val savePlaceUseCase: SavePlaceUseCase,
-    private val deleteSavedPlaceUseCase: DeleteSavedPlaceUseCase
+    private val deleteSavedPlaceUseCase: DeleteSavedPlaceUseCase,
+    private val setAsDefaultUseCase: SetAsDefaultUseCase
 ) : BaseViewModel<SelectorViewEvent, SelectorViewState>() {
 
     private var searchJob: Job? = null
     override fun onViewEvent(viewEvent: SelectorViewEvent) {
         when (viewEvent) {
             is SelectorViewEvent.SearchByQuery -> onSearchQueryChanged(viewEvent.query)
-            is SelectorViewEvent.SavePlace -> savePlace(viewEvent.searchEntity)
+            is SelectorViewEvent.SavePlace -> {
+                if (viewEvent.setAsDefault) setAsDefault(viewEvent.searchEntity.id)
+                savePlace(viewEvent.searchEntity)
+            }
         }
     }
 
@@ -94,6 +99,10 @@ class SelectorViewModel @Inject constructor(
         viewModelScope.launch {
             savePlaceUseCase.execute(searchEntity)
         }
+    }
+
+    private fun setAsDefault(id: String) {
+        setAsDefaultUseCase.execute(id)
     }
 
     private fun postLoadingState() {

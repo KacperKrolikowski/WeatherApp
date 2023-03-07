@@ -5,6 +5,7 @@
     <string name="select_city">Wybierz z listy</string>
     <string name="next_text">Dalej</string>
     <string name="something_went_wrong_info">Coś poszło nie tak, spróbuj ponownie później</string>
+    <string name="internet_connection_problem">Wygląda na to, że masz problem z połączeniem internetowym</string>
 
     <string name="temperature_name">Temperatura</string>
     <string name="wind_name">Wiatr</string>
