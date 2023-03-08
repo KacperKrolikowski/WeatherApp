@@ -6,5 +6,6 @@ data class CurrentWeatherEntity(
     val pressure: Double,
     val feelsLikeTemperature: Double,
     val windDirection: String,
-    val windSpeed: Double
+    val windSpeed: Double,
+    val weatherIconUrl: String
 )

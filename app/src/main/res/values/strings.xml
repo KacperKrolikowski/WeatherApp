@@ -11,5 +11,6 @@
     <string name="wind_name">Wiatr</string>
     <string name="feels_like_name">Odczuwalna temperatura</string>
     <string name="pressure_name">Ciśnienie</string>
+    <string name="today_text">Dzisiaj</string>
     <string name="search_another_place">Poszukaj innego miejsca</string>
 </resources>

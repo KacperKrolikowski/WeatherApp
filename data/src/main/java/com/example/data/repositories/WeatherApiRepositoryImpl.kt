@@ -43,7 +43,12 @@ class WeatherApiRepositoryImpl(
                         pressure = currentResponse.pressureMb,
                         feelsLikeTemperature = currentResponse.feelslikeC,
                         windDirection = currentResponse.windDir,
-                        windSpeed = currentResponse.windKph
+                        windSpeed = currentResponse.windKph,
+                        weatherIconUrl = "https://${
+                            currentResponse.conditionResponse.icon.drop(
+                                2
+                            )
+                        }"
                     ),
                     future = forecastResponse.forecastday.map { forecastDay ->
                         with(forecastDay) {
