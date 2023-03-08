@@ -13,6 +13,7 @@ import com.example.weatherapp.R
 import com.example.weatherapp.base.BaseFragment
 import com.example.weatherapp.databinding.FragmentHomeBinding
 import com.example.weatherapp.ui.home.items.FutureWeatherItem
+import com.example.weatherapp.utils.loadFromUrl
 import com.google.android.material.snackbar.Snackbar
 import com.xwray.groupie.GroupieAdapter
 import dagger.hilt.android.AndroidEntryPoint
@@ -71,9 +72,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewState, HomeViewEv
                 pressureValueText.text = "$pressure hPa"
                 feelsLikeValueText.text = "$feelsLikeTemperature \u2103"
                 locationText.text = location
+                weatherImage.loadFromUrl(weatherIconUrl)
             }
         }
-
+        binding.recyclerView.isVisible = true
         futureWeatherAdapter.update(weatherData.future.map { FutureWeatherItem(it) })
         binding.progressIndicator.isVisible = false
     }

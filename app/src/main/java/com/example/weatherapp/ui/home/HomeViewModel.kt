@@ -26,7 +26,9 @@ class HomeViewModel @Inject constructor(
         viewModelScope.launch {
             getWeatherUseCase.execute(id).onSuccess {
                 mutableViewState.postValue(
-                    HomeViewState.Success(it)
+                    HomeViewState.Success(it.copy(
+                        future = it.future.subList(1, it.future.size -1)
+                    ))
                 )
             }.onFailure {
                 Timber.e(it)

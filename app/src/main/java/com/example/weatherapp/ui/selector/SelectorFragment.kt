@@ -52,13 +52,20 @@ class SelectorFragment :
     }
 
     private fun setSearchResults(results: List<SearchItem>) {
-        binding.progressIndicator.isVisible = false
-        binding.selectFromListText.isVisible = true
+        binding.apply {
+            if (results.isNotEmpty()) selectFromListText.isVisible = true
+            progressIndicator.isVisible = false
+        }
         contentAdapter.apply {
             update(results)
             setOnItemClickListener { item, _ ->
                 if (item is SearchItem) {
-                    viewModel.onViewEvent(SelectorViewEvent.SavePlace(item.item, binding.saveCheckBox.isChecked))
+                    viewModel.onViewEvent(
+                        SelectorViewEvent.SavePlace(
+                            item.item,
+                            binding.saveCheckBox.isChecked
+                        )
+                    )
                     findNavController().navigate(
                         SelectorFragmentDirections.actionSelectorFragmentToHomeFragment(
                             item.item.id

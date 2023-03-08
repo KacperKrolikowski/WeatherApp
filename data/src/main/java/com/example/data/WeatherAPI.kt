@@ -15,7 +15,7 @@ interface WeatherAPI {
     @GET("v1/forecast.json")
     suspend fun getWeatherData(
         @Query(QUERY) id: String,
-        @Query(DAYS_QUERY) days: Int = 7,
+        @Query(DAYS_QUERY) days: Int = 8,
         @Query(AQI_QUERY) aqi: String = FALSE_STRING,
         @Query(ALERTS_QUERY) alerts: String = FALSE_STRING
     ): WeatherResponse

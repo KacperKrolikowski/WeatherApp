@@ -12,4 +12,7 @@
     <color name="temperature_text_low">#0061A3</color>
     <color name="temperature_text_medium">#000000</color>
     <color name="temperature_text_high">#D10000</color>
+    <color name="background_color">#E9F4FF</color>
+    <color name="card_background_color">#D9E2EB</color>
+    <color name="rv_background_color">#CCD6DF</color>
 </resources>

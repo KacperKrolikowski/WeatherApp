@@ -19,13 +19,14 @@ class FutureWeatherItem(
 
     override fun initializeViewBinding(view: View) = ItemFutureWeatherBinding.bind(view)
 
+    @SuppressLint("SetTextI18n")
     override fun bind(binding: ItemFutureWeatherBinding, position: Int) {
         with(binding) {
             dateText.text = formatDate(item.date)
             weatherIcon.loadFromUrl(item.conditionImageUrl)
-            avgTemperatureText.text = item.avgTemperature.toString()
-            minTemperatureText.text = item.minTemperature.toString()
-            maxTemperatureText.text = item.maxTemperature.toString()
+            avgTemperatureText.text = "${item.avgTemperature} \u2103"
+            minTemperatureText.text = "${item.minTemperature} \u2103"
+            maxTemperatureText.text = "${item.maxTemperature} \u2103"
         }
     }
 
@@ -39,8 +40,8 @@ class FutureWeatherItem(
         val inputDate = SimpleDateFormat("yyyy-MM-dd").parse(date)
         return inputDate?.let {
             val calendar = Calendar.getInstance()
-            calendar.time = inputDate
-            "${calendar.get(Calendar.DAY_OF_MONTH)}/${calendar.get(Calendar.MONTH)}"
+            calendar.time = it
+            "${calendar.get(Calendar.DAY_OF_MONTH)}/${calendar.get(Calendar.MONTH) + 1}"
         } ?: ""
     }
 }

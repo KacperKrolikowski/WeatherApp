@@ -7,12 +7,16 @@
     <dimen name="margin_xxl">32dp</dimen>
 
     <dimen name="logo_text_size">64sp</dimen>
+    <dimen name="date_text_size">24sp</dimen>
 
-    <dimen name="location_text_size">12sp</dimen>
+    <dimen name="location_text_size">14sp</dimen>
     <dimen name="future_temperature_text_size">18sp</dimen>
     <dimen name="additional_info_text_size">22sp</dimen>
     <dimen name="temperature_text_size">32sp</dimen>
-    <dimen name="temperature_top_margin">48dp</dimen>
+    <dimen name="temperature_margin">48dp</dimen>
+    <dimen name="temperature_margin_double">96dp</dimen>
+    <dimen name="home_weather_icon_size">64dp</dimen>
     <dimen name="weather_icon_size">24dp</dimen>
     <dimen name="splach_screen_icon_size">50dp</dimen>
+    <dimen name="lottie_animation_size">200dp</dimen>
 </resources>

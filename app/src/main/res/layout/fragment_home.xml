@@ -3,38 +3,53 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="@color/background_color"
     android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/weather_image"
+        android:layout_width="@dimen/home_weather_icon_size"
+        android:layout_height="@dimen/home_weather_icon_size"
+        android:layout_marginTop="@dimen/margin_l"
+        android:layout_marginEnd="@dimen/margin_l"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/location_text" />
 
     <TextView
         android:id="@+id/temperature_value_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/temperature_top_margin"
+        android:layout_marginStart="@dimen/margin_xl"
         android:textSize="@dimen/temperature_text_size"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/weather_image"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/weather_image"
         tools:text="23" />
 
     <TextView
-        android:id="@+id/temperature_text"
+        android:id="@+id/location_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_m"
-        android:text="@string/temperature_name"
-        app:layout_constraintEnd_toEndOf="@+id/temperature_value_text"
-        app:layout_constraintStart_toStartOf="@+id/temperature_value_text"
-        app:layout_constraintTop_toBottomOf="@+id/temperature_value_text"
-        tools:text="Temperature" />
+        android:layout_marginStart="@dimen/margin_l"
+        android:layout_marginTop="@dimen/temperature_margin"
+        android:gravity="center"
+        android:textSize="@dimen/location_text_size"
+        app:drawableStartCompat="@drawable/ic_pin"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/date_text"
+        tools:text="Jawor" />
 
     <TextView
         android:id="@+id/wind_value_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_xl"
+        android:textColor="@color/black"
         android:textSize="@dimen/additional_info_text_size"
-        app:layout_constraintBottom_toBottomOf="@+id/feels_like_value_text"
-        app:layout_constraintEnd_toEndOf="@+id/wind_text"
-        app:layout_constraintStart_toStartOf="@+id/wind_text"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/feels_like_text"
         tools:text="NE 6.1 kmh" />
 
     <TextView
@@ -43,8 +58,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_m"
         android:text="@string/wind_name"
-        app:layout_constraintEnd_toStartOf="@+id/feels_like_text"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/wind_value_text"
+        app:layout_constraintStart_toStartOf="@+id/wind_value_text"
         app:layout_constraintTop_toBottomOf="@+id/wind_value_text"
         tools:text="Wind" />
 
@@ -52,11 +67,13 @@
         android:id="@+id/feels_like_value_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/temperature_top_margin"
+        android:layout_marginTop="@dimen/margin_xl"
+        android:textColor="@color/black"
         android:textSize="@dimen/additional_info_text_size"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/feels_like_text"
         app:layout_constraintStart_toStartOf="@+id/feels_like_text"
-        app:layout_constraintTop_toBottomOf="@+id/location_text"
+        app:layout_constraintTop_toBottomOf="@+id/weather_image"
         tools:text="21" />
 
     <TextView
@@ -65,8 +82,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_m"
         android:text="@string/feels_like_name"
-        app:layout_constraintEnd_toEndOf="@+id/temperature_value_text"
-        app:layout_constraintStart_toStartOf="@+id/temperature_value_text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/feels_like_value_text"
         tools:text="Feels like" />
 
@@ -74,10 +91,13 @@
         android:id="@+id/pressure_value_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_xl"
+        android:textColor="@color/black"
         android:textSize="@dimen/additional_info_text_size"
-        app:layout_constraintBottom_toBottomOf="@+id/feels_like_value_text"
-        app:layout_constraintEnd_toEndOf="@+id/pressure_text"
-        app:layout_constraintStart_toStartOf="@+id/pressure_text"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/wind_text"
         tools:text="1040 mb" />
 
     <TextView
@@ -86,8 +106,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_m"
         android:text="@string/pressure_name"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/feels_like_text"
+        app:layout_constraintEnd_toEndOf="@+id/pressure_value_text"
+        app:layout_constraintStart_toStartOf="@+id/pressure_value_text"
         app:layout_constraintTop_toBottomOf="@+id/pressure_value_text"
         tools:text="Pressure" />
 
@@ -95,26 +115,16 @@
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/margin_xl"
+        android:paddingVertical="@dimen/margin_xl"
         android:layout_marginTop="@dimen/margin_xxl"
         android:orientation="horizontal"
+        android:visibility="invisible"
+        tools:visibility="visible"
+        android:background="@color/rv_background_color"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/feels_like_text" />
-
-    <TextView
-        android:id="@+id/location_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_xl"
-        android:gravity="center"
-        android:textSize="@dimen/location_text_size"
-        app:drawableStartCompat="@drawable/ic_pin"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/temperature_text"
-        tools:text="Jawor" />
+        app:layout_constraintTop_toBottomOf="@+id/pressure_text" />
 
     <com.google.android.material.progressindicator.CircularProgressIndicator
         android:id="@+id/progress_indicator"
@@ -138,4 +148,17 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/date_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_l"
+        android:text="@string/today_text"
+        android:textSize="@dimen/date_text_size"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
